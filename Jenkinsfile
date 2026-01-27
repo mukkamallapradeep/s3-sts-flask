@@ -4,7 +4,7 @@ pipeline {
   environment {
     AWS_REGION      = 'ap-south-1'
     SECRET_NAME     = 'prod/jenkins/aws-keys'
-    ASSUME_ROLE_ARN = 'arn:aws:iam::<ACCOUNT_ID>:role/S3LimitedAccessRole'
+    ASSUME_ROLE_ARN = 'arn:aws:iam::432870135296:role/S3LimitedAccessRole'
     S3_BUCKET       = 'vms-lab-pradeep-logs'
     IMAGE_NAME      = 's3-sts-flask:latest'
   }
