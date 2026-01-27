@@ -62,18 +62,20 @@
           <td>{{ o.Key }}</td>
           <td>{{ o.Size }}</td>
           <td>{{ o.LastModified }}</td>
+         
+          <td>
+            /api/download?key={{ o.Key | urlencode }}Download</a>
+          </td>
           
           <td>
-            
-          <td>
-            <a href="/api/download?key={{ o.Key | urlencodead}}">download</a>
-          </td>
+            /api/object
+              <!-- Pass key safely -->
+              <input type="hidden" name="key" value="{{ o.Key }}">
+              
+              <button type="submit">Delete</button>
+            </form>
+</td>
 
-          </td>
-
-           <td> <form action="/api/object?key={{o.key}}" method="post" style="display:inline;"
-                  onsubmit="<button type="submit">Delete</button></form>
-           </td>
         </tr>
         {% else %}
         <tr>
