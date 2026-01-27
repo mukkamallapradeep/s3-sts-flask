@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        checkout scm
+        checkout Branch: 'main' , url: 'https://github.com/mukkamallapradeep/s3-sts-flask.git' 
       }
     }
 
