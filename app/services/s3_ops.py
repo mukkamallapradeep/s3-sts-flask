@@ -61,4 +61,4 @@ def basic_metrics(contents: Optional[List[Dict]]) -> Dict:
     }
     log.info(f"Metrics: {metrics}")
     return metrics
-``
+
