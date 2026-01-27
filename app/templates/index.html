@@ -59,24 +59,23 @@
       <tbody>
         {% for o in objects %}
         <tr>
-          <td>{{ o.Key }}</td>
-          <td>{{ o.Size }}</td>
-          <td>{{ o.LastModified }}</td>
-         
-          <td>
-            /api/download?key={{ o.Key | urlencode }}Download</a>
-          </td>
+            <td>{{ o.Key }}</td>
+            <td>{{ o.Size }}</td>
+            <td>{{ o.LastModified }}</td>
           
-          <td>
-            /api/object
-              <!-- Pass key safely -->
-              <input type="hidden" name="key" value="{{ o.Key }}">
-              
-              <button type="submit">Delete</button>
-            </form>
-</td>
-
-        </tr>
+            <!-- Download as a link -->
+            <td>
+              /api/download?key={{ o.Key | urlencode }}Download</a>
+              <!-- If you're on Flask, prefer:
+              {{ url_for(Download</a> -->
+            </td>
+          
+            <!-- Delete as a form with a button -->
+            <td>
+              <form action="/api/object" method="post" style="display:inline;" onsubmit="return confirm('submit">Delete</button>
+              </form>
+            </td>
+      </tr>
         {% else %}
         <tr>
           <td colspan="4"><em>No objects</em></td>
