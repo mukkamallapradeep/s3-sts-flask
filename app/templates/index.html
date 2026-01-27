@@ -64,9 +64,11 @@
           <td>{{ o.LastModified }}</td>
           
           <td>
-            /api/download?key={{ o.Key | urlencode }}
-            Download
-            </a>
+            
+          <td>
+            <a href="/api/download?key={{ o.Key | urlencodead}}">download</a>
+          </td>
+
           </td>
 
            <td> <form action="/api/object?key={{o.key}}" method="post" style="display:inline;"
