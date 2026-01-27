@@ -62,19 +62,11 @@
             <td>{{ o.Key }}</td>
             <td>{{ o.Size }}</td>
             <td>{{ o.LastModified }}</td>
-          
-            <!-- Download as a link -->
             
             <td>
-                {{ url_for(Download</a>
+                <a href="{{ url_for('api.download', key=o.Keyform action="{{ url_for('api.object') }}" method="post" style="display:inline;" onsubmit="return confirm('Delete {{ o </form>
               </td>
 
-          
-            <!-- Delete as a form with a button -->
-            <td>
-              <form action="/api/object" method="post" style="display:inline;" onsubmit="return confirm('submit">Delete</button>
-              </form>
-            </td>
       </tr>
         {% else %}
         <tr>
