@@ -47,7 +47,7 @@ def api_upload():
     if "file" not in request.files:
         return {"error": "file form field is required"}, 400
     file = request.files["file"]
-    key = request.form.get("key", f"uploads/{file.filename}")
+    key = f"uploads/{file.filename}"
     if not file or file.filename == "":
         return {"error": "empty file"}, 400
     upload_fileobj(_s3(), bucket, file.stream, key)
