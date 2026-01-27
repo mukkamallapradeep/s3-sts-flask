@@ -37,4 +37,3 @@ def delete():
     delete_object(_s3(), bucket, key)
     flash(f"Deleted s3://{bucket}/{key}", "success")
     return redirect(url_for("views.index"))
-``
