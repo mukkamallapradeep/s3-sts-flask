@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main' , url: 'https://github.com/mukkamallapradeep/s3-sts-flask.git' 
+        git branch: 'main', url: 'https://github.com/mukkamallapradeep/s3-sts-flask.git'
       }
     }
 
@@ -24,18 +24,27 @@ pipeline {
 
     stage('Run App') {
       steps {
-        sh '''
-          mkdir -p app_logs
-          docker rm -f s3-sts-web || true
-          docker run --name s3-sts-web -d \
-            -p 8000:8000 \
-            -e AWS_REGION=$AWS_REGION \
-            -e SECRET_NAME=$SECRET_NAME \
-            -e ASSUME_ROLE_ARN=$ASSUME_ROLE_ARN \
-            -e S3_BUCKET=$S3_BUCKET \
-            -v $(pwd)/app_logs:/app_logs \
-            $IMAGE_NAME
-        '''
+        withAWS(credentials: 'jenkins-aws-creds', region: "${AWS_REGION}", 
+                // Optional: if you want Jenkins to assume a role before running app:
+                // role: "${ASSUME_ROLE_ARN}", roleSessionName: "jenkins-s3-sts"
+        ) {
+          sh '''
+            mkdir -p app_logs
+            docker rm -f s3-sts-web || true
+            # Pass the session creds from withAWS into container
+            docker run --name s3-sts-web -d \
+              -p 8000:8000 \
+              -e AWS_REGION=$AWS_REGION \
+              -e SECRET_NAME=$SECRET_NAME \
+              -e ASSUME_ROLE_ARN=$ASSUME_ROLE_ARN \
+              -e S3_BUCKET=$S3_BUCKET \
+              -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+              -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+              -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
+              -v $(pwd)/app_logs:/app_logs \
+              $IMAGE_NAME
+          '''
+        }
       }
     }
   }
