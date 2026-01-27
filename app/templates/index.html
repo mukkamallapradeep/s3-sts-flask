@@ -1,1 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>S3 STS Automation</title>
+  {{ url_for(
+</head>
+<body>
+  <h1>S3 STS Automation</h1>
 
+  <section>
+    <h3>Bucket: {{ bucket }}</h3>
+    /
+      <input type="text" name="prefix" placeholder="prefix" value="{{ prefix or '' }}">
+      <button type="submit">List Objects</button>
+      /api/bucketsList Buckets (API)</a>
+    </form>
+  </section>
+
+  <section>
+    <h3>Upload</h3>
+    /upload
+      <input type="file" name="file" required>
+      <input type="text" name="key" placeholder="s3 key (optional)">
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+  <section>
+    <h3>Metrics</h3>
+    <pre>{{ metrics | tojson(indent=2) }}</pre>
+  </section>
+
+  <section>
+    <h3>Objects</h3>
+    <table>
+      <thead><tr><th>Key</th><th>Size</th><th>Last Modified</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for o in objects %}
+      <tr>
+        <td>{{ o.Key }}</td>
+        <td>{{ o.Size }}</td>
+        <td>{{ o.LastModified }}</td>
+        <td>
+          /api/download?key={{ o.Key }}Download</a>
+          /delete
+            <input type="hidden" name="key" value="{{ o.Key }}">
+            <button type="submit" onclick="return confirm('Delete {{ o.Key }}?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4"><em>No objects</em></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>
+``
