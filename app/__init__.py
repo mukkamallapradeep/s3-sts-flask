@@ -5,7 +5,6 @@ from app.config import Config
 from app.logging_config import configure_logging
 from app.routes.api import api
 from app.routes.views import views
-from app.services.aws_clients import STSSessionCache
 
 def create_app():
     app = Flask(__name__, template_folder="templates", static_folder="static")
@@ -15,8 +14,8 @@ def create_app():
     # Logging
     configure_logging(app_config.LOG_DIR, app_config.LOG_LEVEL)
 
-    # STS cache
-    app.config["STS_CACHE"] = STSSessionCache(app_config)
+    # REMOVE STSSessionCache – not needed in new architecture
+    # app.config["STS_CACHE"] = STSSessionCache(app_config)
 
     # Flask settings
     app.secret_key = app_config.SECRET_KEY
