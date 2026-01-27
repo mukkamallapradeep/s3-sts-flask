@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>S3 STS Automation</title>
+  /static/style.css
+</head>
 
+<body>
+  <h1>S3 STS Automation</h1>
 
   <!-- Bucket Info -->
   <section>
@@ -21,17 +25,16 @@
 
   <!-- Upload Section -->
   <section>
-    <h3>Upload</h3>
-    /api/upload
-      <input type="file" name="file" required>
-      <br><br>
+    <h3>Upload File</h3>
+
+    <form action="/api/upload" method="post" enctype="multipart      <br><br>
       <input type="text" name="key" placeholder="s3 key (optional)">
       <br><br>
       <button type="submit">Upload</button>
     </form>
   </section>
 
-  <!-- Metrics Section -->
+  <!-- Metrics -->
   <section>
     <h3>Metrics</h3>
     <pre>{{ metrics | tojson(indent=2) }}</pre>
@@ -41,7 +44,7 @@
   <section>
     <h3>Objects</h3>
 
-    <table>
+    <table border="1" cellpadding="6">
       <thead>
         <tr>
           <th>Key</th>
@@ -59,9 +62,9 @@
           <td>{{ o.LastModified }}</td>
           <td>
             /api/download?key={{ o.Key }}Download</a>
-
-            <form action="/api/object?key={{ o.Key }}" method="post" style="display:inline;"
-                            <button type="submit">Delete</button>
+            &nbsp;|&nbsp;
+            <form action="/api/object" method="post" style="display:inline;"
+                  onsubmit="<button type="submit">Delete</button>
             </form>
           </td>
         </tr>
