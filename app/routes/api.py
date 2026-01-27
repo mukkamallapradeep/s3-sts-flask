@@ -2,7 +2,7 @@ import io
 import logging
 from flask import Blueprint, jsonify, request, send_file, current_app
 
-from app.services.aws_clients import STSSessionCache
+from app.services.aws_clients import AWSClients
 from app.services.s3_ops import (
     list_buckets, list_objects, upload_fileobj, download_to_bytes, delete_object, basic_metrics
 )
@@ -11,8 +11,8 @@ api = Blueprint("api", __name__)
 log = logging.getLogger(__name__)
 
 def _s3():
-    cache: STSSessionCache = current_app.config["STS_CACHE"]
-    return cache.s3_client()
+    aws = AWSClients()
+    return aws.session().client("s3")
 
 @api.get("/healthz")
 def healthz():
@@ -60,7 +60,6 @@ def api_download():
     if not key:
         return {"error": "key is required"}, 400
     data = download_to_bytes(_s3(), bucket, key)
-    # send as attachment
     return send_file(
         io.BytesIO(data),
         mimetype="application/octet-stream",
