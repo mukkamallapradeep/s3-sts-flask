@@ -64,11 +64,11 @@
             <td>{{ o.LastModified }}</td>
           
             <!-- Download as a link -->
+            
             <td>
-              /api/download?key={{ o.Key | urlencode }}Download</a>
-              <!-- If you're on Flask, prefer:
-              {{ url_for(Download</a> -->
-            </td>
+                {{ url_for(Download</a>
+              </td>
+
           
             <!-- Delete as a form with a button -->
             <td>
