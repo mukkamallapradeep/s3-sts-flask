@@ -4,7 +4,7 @@ class Config:
     # Core AWS config
     AWS_REGION = os.getenv("AWS_REGION", "ap-south-1")
     SECRET_NAME = os.getenv("SECRET_NAME", "prod/jenkins/aws-keys")
-    ASSUME_ROLE_ARN = os.getenv("ASSUME_ROLE_ARN", "arn:aws:iam::<ACCOUNT_ID>:role/S3LimitedAccessRole")
+    ASSUME_ROLE_ARN = os.getenv("ASSUME_ROLE_ARN", "arn:aws:iam::432870135296:role/S3LimitedAccessRole")
 
     # Target bucket
     S3_BUCKET = os.getenv("S3_BUCKET", "vms-lab-pradeep-logs")
