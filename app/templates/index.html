@@ -64,7 +64,7 @@
             <td>{{ o.LastModified }}</td>
             
             <td>
-                <form action="/api/download?key={{ o.Key|urlencode }}">
+                <form action="/download?key={{ o.Key|urlencode }}">
                   <button type="submit">Download</button>
                 </form>
               </td>
