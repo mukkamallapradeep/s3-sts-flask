@@ -68,10 +68,10 @@ def api_download():
         download_name=key.split("/")[-1]
     )
 
-@api.delete("/object")
+@api.post("/delete")
 def api_delete():
     bucket = current_app.config["S3_BUCKET"]
-    key = request.args.get("key")
+    key = request.form.get("key")
     if not key:
         return {"error": "key is required"}, 400
     delete_object(_s3(), bucket, key)
