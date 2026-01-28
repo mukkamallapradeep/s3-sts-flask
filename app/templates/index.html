@@ -67,18 +67,15 @@
                 <form action="/api/download" method="post">
                 <input type="hidden" name="key" value="{{ o.Key }}">
                 <button type="submit">Download</button>
-  </form>
-
                 </form>
-              </td>
-
+             </td>
             
             <td>
-              <api/delete
-                <input type="hidden" name="key" value="{{ o.key|urlencode }}">
-                <button type="submit">Delete</button>
-              </form>
-            </td>
+                <form action="/api/delete" method="post">
+                <input type="hidden" name="key" value="{{ o.Key }}">
+                <button type="submit">delete</button>
+                </form>
+             </td>
 
       </tr>
         {% else %}
