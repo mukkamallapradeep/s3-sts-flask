@@ -62,12 +62,13 @@
             <td>{{ o.Key }}</td>
             <td>{{ o.Size }}</td>
             <td>{{ o.LastModified }}</td>
+            
             <td>
-              /api/download
-                <input type="hidden" name="key" value="{{ o.key|urlencode }}">
-                <button type="submit">Download</button>
-              </form>
-            </td>
+                <form action="/api/download" method="get" name="key" value="{{ o.key|urlencode }}">
+                  <button type="submit">Download</button>
+                </form>
+              </td>
+
             
             <td>
               <api/delete
