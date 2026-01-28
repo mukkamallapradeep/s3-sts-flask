@@ -53,10 +53,11 @@ def api_upload():
     upload_fileobj(_s3(), bucket, file.stream, key)
     return {"message": "uploaded", "bucket": bucket, "key": key}, 201
 
-@api.get("/download")
+@api.post("/download")
 def api_download():
     bucket = current_app.config["S3_BUCKET"]
-    key = request.args.get("key")
+    key = request.form.get("key")
+    log.info(key)
     if not key:
         return {"error": "key is required"}, 400
     data = download_to_bytes(_s3(), bucket, key)
