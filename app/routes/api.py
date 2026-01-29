@@ -21,7 +21,7 @@ def healthz():
 @api.get("/buckets")
 def api_buckets():
     names = list_buckets(_s3())
-    return jsonify({"buckets": names})
+    return return {"buckets": names}
 
 @api.get("/objects")
 def api_objects():
